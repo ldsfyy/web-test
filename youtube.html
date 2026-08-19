@@ -7,8 +7,8 @@
   </head>
   <body>
     <h1>My Favorite Relaxing Videos</h1>
-
     <!-- 1st Video (Normal Video) -->
+    <!-- Added "?autoplay=1&mute=1" -->
     <iframe
       width="746"
       height="420"
@@ -17,40 +17,34 @@
       frameborder="0"
       allowfullscreen
     ></iframe>
-
     <!-- 2nd Video (Muted by default) -->
-    <!-- Added "?mute=1" to the URL to mute the sound -->
+    <!-- Added "?autoplay=1&mute=1" -->
     <iframe
       width="746"
       height="420"
-      src="https://www.youtube.com/embed/Hpq8mimqKug"
+      src="https://www.youtube.com/embed/Hpq8mimqKug?autoplay=1&mute=1"
       title="Video 2"
       frameborder="0"
       allowfullscreen
     ></iframe>
-
     <hr />
-
     <!-- 3rd Video (Custom Input Player) -->
     <!-- Added style to remove extra margins and spacing -->
     <h2 style="margin-top: 5px; margin-bottom: 5px">Watch Any Video</h2>
     <!-- 1. Link to YouTube (Top) -->
-
     <input
       type="text"
       id="videoIdInput"
-      placeholder="Enter YouTube URL or 11-digit ID"
-      style="width: 800px"
+      placeholder="Enter YouTube URL"
+      style="width: 650px"
     />
     <button onclick="changeVideo()">Play Video</button>
-    <!-- Moved below the input box, changed to plain text, and added "Reference:" -->
     <div style="font-size: 14px; margin-top: 5px; margin-bottom: 10px">
       Reference:
-      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
-        >Go to YouTube</a
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+        Go to YouTube</a
       >
     </div>
-
     <!-- This is the custom player area -->
     <iframe
       id="customPlayer"
@@ -60,7 +54,6 @@
       frameborder="0"
       allowfullscreen
     ></iframe>
-
     <script>
       function changeVideo() {
         const rawInput = document.getElementById("videoIdInput").value.trim();
