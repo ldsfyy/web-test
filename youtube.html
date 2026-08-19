@@ -1,30 +1,92 @@
 <!doctype html>
-<!-- Changed to lang="en" -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- English Title -->
     <title>My Cozy Space</title>
   </head>
   <body>
-    <!-- English Heading -->
     <h1>My Favorite Relaxing Videos</h1>
 
-    <!-- Paste your 1st YouTube code here -->
+    <!-- 1st Video (Normal Video) -->
     <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/live/fO9e9jnhYK8?si=w_9IwQytqQsDHdRe"
-      ...
+      width="746"
+      height="420"
+      src="https://www.youtube.com/embed/fO9e9jnhYK8?autoplay=1&mute=1"
+      title="Video 1"
+      frameborder="0"
+      allowfullscreen
     ></iframe>
 
-    <!-- Paste your 2nd YouTube code here -->
+    <!-- 2nd Video (Muted by default) -->
+    <!-- Added "?mute=1" to the URL to mute the sound -->
     <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/live/0FBiyFpV__g?si=YIDnmEw29T7tO857"
-      ...
+      width="746"
+      height="420"
+      src="https://www.youtube.com/embed/Hpq8mimqKug"
+      title="Video 2"
+      frameborder="0"
+      allowfullscreen
     ></iframe>
+
+    <hr />
+
+    <!-- 3rd Video (Custom Input Player) -->
+    <!-- Added style to remove extra margins and spacing -->
+    <h2 style="margin-top: 5px; margin-bottom: 5px">Watch Any Video</h2>
+    <!-- 1. Link to YouTube (Top) -->
+
+    <input
+      type="text"
+      id="videoIdInput"
+      placeholder="Enter YouTube URL or 11-digit ID"
+      style="width: 800px"
+    />
+    <button onclick="changeVideo()">Play Video</button>
+    <!-- Moved below the input box, changed to plain text, and added "Reference:" -->
+    <div style="font-size: 14px; margin-top: 5px; margin-bottom: 10px">
+      Reference:
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+        >Go to YouTube</a
+      >
+    </div>
+
+    <!-- This is the custom player area -->
+    <iframe
+      id="customPlayer"
+      width="746"
+      height="420"
+      src="https://www.youtube.com/embed/es4x5R-rV9s"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+
+    <script>
+      function changeVideo() {
+        const rawInput = document.getElementById("videoIdInput").value.trim();
+        const player = document.getElementById("customPlayer");
+
+        // 1. Split the URL by specific characters
+        const parts = rawInput.split(/[\/?&=]/);
+
+        // 2. Find the 11-digit Video ID from the parts
+        const videoId = parts.find((part) => part.length === 11);
+
+        if (videoId) {
+          // ★Fix for Live Streams: Added extra parameters to allow live embedding.
+          // Live streams require these parameters to prevent connection refusal.
+          player.src =
+            "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1";
+        } else if (rawInput.length === 11) {
+          // If the user inputs the 11-digit ID directly
+          player.src =
+            "https://www.youtube.com/embed/" + rawInput + "?autoplay=1&mute=1";
+        } else {
+          alert(
+            "Invalid Input! Please enter a valid YouTube URL or 11-digit Video ID.",
+          );
+        }
+      }
+    </script>
   </body>
 </html>
